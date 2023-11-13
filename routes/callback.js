@@ -226,39 +226,12 @@ router.post("/", cleanBody, async (req, res) => {
  const {name, id,profile_image_url,username } = await data
 
  console.log("name, id,profile_image_url,username", name, id,profile_image_url,username)
-if(name || id || profile_image_url || username){
+
   let user = await User.findOne({ twitterId: id });
-  let referrer = await User.findOne({ userName: ref });
+ 
   if (!user) {
-    console.log("No user", "callback", user)
-    if (!referrer) {
-      console.log("No referrer", "callback",referrer)
+   
 
-      const newUser = new User({
-        name: data?.name,
-        userName: username,
-        twitterId: id,
-        profileImageUrl: profile_image_url,
-        total_points: 550,
-        task_one: false,
-        task_two: false,
-        task_three: false,
-        task_four: false,
-        referrals: [],
-        referrer: "",
-
-      })
-      const dbUser = await newUser.save();
-
-      return res.status(200).json({
-        success: true,
-        user: dbUser,
-
-      });
-    } else {
-      console.log("referrer", referrer)
-
-      await User.updateOne({ userName: referrer.userName }, { ...referrer, $push: { referrals: data.username } })
       const newUser = new User({
         name: data?.name,
         userName: data?.username,
@@ -274,20 +247,23 @@ if(name || id || profile_image_url || username){
         referrer: ref
 
       })
-      const dBUser = await newUser.save();
+      await newUser.save();
       return res.status(200).json({
         success: true,
-        user: dBUser,
+        user: newUser,
 
       });
-    }
+    
 
-    console.log("user", user)
-  } else {
-return
+   
+  } 
 
-  }
-}
+  return res.status(200).json({
+    success: true,
+    user: user,
+
+  });
+
  
   // console.log("messageResponseRawdataCallbackUser", user);
 
