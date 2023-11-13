@@ -57,7 +57,7 @@ app.use(cookieParser());
 // set up cors to allow us to accept requests from our client
 app.use(
   cors({
-    origin: "*",
+    origin: "https://mini-app-sol-3b4dbf04ff49.herokuapp.com",
     optionsSuccessStatus: 200,
     methods: "GET, PUT, POST, PATCH, DELETE, OPTIONS",
     accessAllowOrigin: "*",
