@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
-// const CLIENT_HOME_PAGE_URL = "http://localhost:3000";
-const CLIENT_HOME_PAGE_URL = "https://mini-app-sol-3b4dbf04ff49.herokuapp.com";
+const CLIENT_HOME_PAGE_URL = "http://localhost:3000";
+// const CLIENT_HOME_PAGE_URL = "https://mini-app-sol-3b4dbf04ff49.herokuapp.com";
 const crypto = require('crypto'); // Cryptographic library
 const Oauth = require('oauth-1.0a'); // OAuth 1.0a library
 const accessTokenURL = 'https://api.twitter.com/oauth/access_token';
@@ -22,11 +22,13 @@ const oauth = Oauth({
 // https://mini-app-sol-3b4dbf04ff49.herokuapp.com
 //https%3A%2F%2Fmini%2Dapp%2Dsol%2D3b4dbf04ff49%2Eherokuapp%2Ecom
 //https%3A%2F%2Fmini-app-sol-3b4dbf04ff49.herokuapp.com
+// const requestTokenURL = `https://api.twitter.com/oauth/request_token?oauth_callback=http%3A%2F%2Flocalhost%3A3000%2Fcallback&x_auth_access_type=write`;
+
 async function requestToken (req, res){
 
   try {
-      // const requestTokenURL = `https://api.twitter.com/oauth/request_token?oauth_callback=http%3A%2F%2Flocalhost%3A3000%2Fcallback&x_auth_access_type=write`;
-      const requestTokenURL = `https://api.twitter.com/oauth/request_token?oauth_callback=https%3A%2F%2Fmini-app-sol-3b4dbf04ff49.herokuapp.com%2Fcallback&x_auth_access_type=write`;
+
+  const requestTokenURL = `https://api.twitter.com/oauth/request_token?oauth_callback=https%3A%2F%2Fmini-app-sol-3b4dbf04ff49.herokuapp.com%2Fcallback&x_auth_access_type=write`;
       const authHeader = oauth.toHeader(oauth.authorize({
           url: requestTokenURL,
           method: 'POST'
@@ -191,13 +193,15 @@ router.get("/logout", (req, res) => {
 
 router.get("/twitter", async (req, res) => {
   try {
+    console.log("start here")
       // Get the request token from Twitter
       const oAuthRequestToken = await requestToken();
       const {ref} = req.body
-
+console.log("oAuthRequestToken", oAuthRequestToken, "i got here")
       // Request the user for a PIN
       const authorizeURL = `https://api.twitter.com/oauth/authenticate?oauth_token=${oAuthRequestToken.oauth_token}`;
     
+      console.log("authorizeURL", authorizeURL, "got here")
        res.send({
           success: true,
           message: "User logged in successfully",

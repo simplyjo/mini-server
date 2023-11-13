@@ -19,38 +19,17 @@ app.use(
   })
 );
 
-const pdf = require("html-pdf");
-const pdfTemplate = require("./documents");
-const loginRoute = require("./routes/loginauth");
-const callbackRoute = require("./routes/callback");
-const indexRoute = require("./routes/index");
-const registerRoute = require("./routes/register");
-const discountRoute = require("./routes/discounts");
-const couponRoute = require("./routes/coupons");
-const discountSearchRoute = require("./routes/discountsSearch");
-const activateRoute = require("./routes/activate");
-const forgotRoute = require("./routes/forgot");
-const referredRoute = require("./routes/referred");
-const adminRoute = require("./routes/admin");
-const logoutRoute = require("./routes/logout");
-const userRoute = require("./routes/user");
-const resetRoute = require("./routes/reset");
-const receiptRoute = require("./routes/receipts");
-const merchantRoute = require("./routes/merchant");
-const orderRoute = require("./routes/order");
-const buypointRoute = require("./routes/buypoint");
-const cardRoute = require("./routes/card");
-const cardProcessingRoute = require("./routes/cardprocessing");
-const agentRoute = require("./routes/agent");
-const sudoRoute = require("./routes/sudocustomer");
-const rewardRoute = require("./routes/reward");
-const testRoute = require("./routes/test");
-const ticketRoute = require("./routes/tickets");
-const storeRoute = require("./routes/store");
-const teamRoute = require("./routes/team");
-const productRoute = require("./routes/products");
-const productOrderRoute = require("./routes/productOrders");
 
+const loginRoute = require("./routes/loginauth");
+const indexRoute = require("./routes/index");
+const authRoutes = require("./routes/auth-routes");
+const callbackRoute = require("./routes/callback");
+const getLikesRoute = require("./routes/getLikes");
+const getRtRoute = require("./routes/getRetweets");
+const getQuoteRoute = require("./routes/getQuotes");
+const getTaskRoute = require("./routes/getTask");
+const getReferrerRoute = require("./routes/referrer");
+const getTweetRoute = require("./routes/getTweet");
 
 require("dotenv").config();
 
@@ -63,37 +42,17 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 app.use("/login", loginRoute);
+app.use("/auth", authRoutes);
 app.use("/callback", callbackRoute);
-app.use("/productOrders", productOrderRoute);
-app.use("/products", productRoute);
-app.use("/team", teamRoute);
-app.use("/store", storeRoute);
-app.use("/ticket", ticketRoute);
-app.use("/test", testRoute);
-app.use("/register", registerRoute);
-app.use("/discountsSearch", discountSearchRoute);
-app.use("/discounts", discountRoute);
-app.use("/coupons", couponRoute);
-app.use("/receipts", receiptRoute);
-app.use("/merchant", merchantRoute);
-app.use("/admin", adminRoute);
-app.use("/forgot", forgotRoute);
-app.use("/activate", activateRoute);
-app.use("/referred", referredRoute);
-app.use("/logout", logoutRoute);
-app.use("/user", userRoute);
-app.use("/reset", resetRoute);
-app.use("/order", orderRoute);
-app.use("/card", cardRoute);
-app.use("/cardprocessing", cardProcessingRoute);
-app.use("/agent", agentRoute);
-app.use("/buypoint", buypointRoute);
-app.use("/customers", sudoRoute);
-app.use("/rewards", rewardRoute);
+app.use("/task", getTaskRoute);
+app.use("/like", getLikesRoute);
+app.use("/rt", getRtRoute);
+app.use("/quote", getQuoteRoute);
+app.use("/referrer", getReferrerRoute);
+app.use("/tweet", getTweetRoute);
 
-app.get("/fetch-pdf", (req, res) => {
-  res.sendFile(`${__dirname}/result.pdf`);
-});
+
+
 app.use("/", indexRoute);
 app.use(express.static("client/build"));
 
