@@ -57,7 +57,7 @@ app.use(cookieParser());
 // set up cors to allow us to accept requests from our client
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "*",
     optionsSuccessStatus: 200,
     methods: "GET, PUT, POST, PATCH, DELETE, OPTIONS",
     accessAllowOrigin: "*",
@@ -89,10 +89,10 @@ const authCheck = (req, res, next) => {
 // if it's already login, send the profile response,
 // otherwise, send a 401 response that the user is not authenticated
 // authCheck before navigating to home page
-app.get("/", authCheck, (req, res) => {
+app.get("/", (req, res) => {
   res.status(200).json({
     authenticated: true,
-    message: "user successfully authenticated",
+    message: "home",
     user: req.user,
     cookies: req.cookies
   });
