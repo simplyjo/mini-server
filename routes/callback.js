@@ -5,7 +5,7 @@ const Oauth = require('oauth-1.0a'); // OAuth 1.0a library
 const express = require("express");
 const User = require("../models/user");
 const needle = require("needle");
-
+const fetch = require('node-fetch');
 
 
 const router = express.Router();
