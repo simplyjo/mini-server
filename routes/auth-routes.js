@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const passport = require("../helpers/passport-setup");
+
 const CLIENT_HOME_PAGE_URL = "http://localhost:3000";
 const crypto = require('crypto'); // Cryptographic library
 const Oauth = require('oauth-1.0a'); // OAuth 1.0a library
@@ -181,8 +181,7 @@ router.get("/logout", (req, res) => {
   res.redirect(CLIENT_HOME_PAGE_URL);
 });
 
-// auth with twitter
-// router.get("/twitter", passport.authorize("twitter"));
+
 
 
 

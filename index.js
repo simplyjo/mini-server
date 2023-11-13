@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 const port = 4000;
-const passport = require("passport");
+
 const session = require("express-session");
 const authRoutes = require("./routes/auth-routes");
 const mongoose = require("mongoose");
@@ -52,10 +52,7 @@ app.use(
 // parse cookies
 app.use(cookieParser());
 
-// initalize passport
-app.use(passport.initialize());
-// deserialize cookie from the browser
-app.use(passport.session());
+
 
 // set up cors to allow us to accept requests from our client
 app.use(
