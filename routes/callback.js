@@ -244,7 +244,8 @@ router.post("/", cleanBody, async (req, res) => {
         task_four: false,
         referrals: [],
         referrer: "",
-        referrer: ref
+        referrer: ref,
+        tweet:false
 
       })
       await newUser.save();
