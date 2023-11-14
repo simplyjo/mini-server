@@ -82,13 +82,11 @@ router.post("/one", cleanBody, async (req, res) => {
   const userData = await getUser(userId);
   console.log("user", userData)
 
+  let user = await User.findOne({ twitterId: userId });
 
   if (userData?.data?.name.split('❤️')[1].trim() === "love") {
-    let user = await User.findOne({ twitterId: userId });
-    if (!user) {
-      return
-
-    } else {
+    if (user) {
+  
       console.log("userfound", user)
       if (user.task_one === false)
 
@@ -107,7 +105,11 @@ router.post("/one", cleanBody, async (req, res) => {
 
     });
   } else {
-    return
+    return res.status(200).json({
+      success: true,
+      user: user,
+
+    });
   }
 
 

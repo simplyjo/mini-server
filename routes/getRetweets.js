@@ -96,13 +96,10 @@ router.post("/one", cleanBody, async (req, res) => {
 
     const taskStatus = await userRt?.data?.findIndex(el => el.id === userId)
   console.log("taskStatus", taskStatus)
+  let  user = await User.findOne({ twitterId: userId }); 
+
   if(taskStatus >= 0) {
-    let  user = await User.findOne({ twitterId: userId }); 
-    if(!user) {
-   
-return
-    } else {
-   console.log("userfound", user)
+    if(user) {
    if(user.task_three === false)
 
       user.task_three = true
@@ -119,21 +116,7 @@ return
       
     });
   } else {
-    let  user = await User.findOne({ twitterId: userId }); 
-    if(!user) {
-   
-
-    } else {
-   console.log("userfound", user)
-
-      user.task_three = false
-      user.total_points = user.total_points - 550
-
-      await user.save();
-   console.log("userfoundSaved", user)
-
-
-    }
+  
     return res.status(200).json({
       success: true,
       user:user,

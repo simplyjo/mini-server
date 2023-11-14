@@ -93,23 +93,16 @@ router.post("/one", cleanBody, async (req, res) => {
 
     const taskStatus = await userLikes?.data?.findIndex(el => el.id === tweetId)
   console.log("taskStatus", taskStatus)
-  if(taskStatus >= 0) {
-    let  user = await User.findOne({ twitterId: userId });
-    if(!user) {
-      user.task_two = false
-      user.total_points = user.total_points - 1100
-      await user.save();
+  let  user = await User.findOne({ twitterId: userId });
 
-    } else {
-   console.log("userfound", user)
-   if(user.task_two === false)
+  if(taskStatus >= 0) {
+    if(user) {
+      if(user.task_two === false)
 
       user.task_two = true
       user.total_points = user.total_points + 1100
 
       await user.save();
-   console.log("userfoundSaved", user)
-
 
     }
     return res.status(200).json({
@@ -118,28 +111,15 @@ router.post("/one", cleanBody, async (req, res) => {
       
     });
   } else {
-    let  user = await User.findOne({ twitterId: userId });
-    if(!user) {
-  
+    
 
-    } else {
-   console.log("userfound", user)
-
-      user.task_two = false
-      user.total_points = user.total_points - 1100
-      await user.save();
-   console.log("userfoundSaved", user)
-
-
-    }
     return res.status(200).json({
       success: true,
       user:user,
       
     });
   }
-   
-  // console.log("userLikes", userLikes) 
+  
 
 })
 

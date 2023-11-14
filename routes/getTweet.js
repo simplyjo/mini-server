@@ -71,12 +71,10 @@ router.post("/", cleanBody, async (req, res) => {
 
     const taskStatus = await userTweet?.data?.findIndex(el => el.id === tweetId)
   console.log("taskStatus", taskStatus)
-  if(userTweet?.data?.length >= 1) {
-    let  user = await User.findOne({ twitterId: userId });
-    if(!user) {
-      return
+  let  user = await User.findOne({ twitterId: userId });
 
-    } else {
+  if(userTweet?.data?.length >= 1) {
+    if(user) {
    console.log("userfound", user)
    if(user.tweet === false)
 
@@ -94,7 +92,11 @@ router.post("/", cleanBody, async (req, res) => {
       
     });
   } else {
-    return
+    return res.status(200).json({
+      success: true,
+      user:user,
+      
+    });
   }
    
   // console.log("userLikes", userLikes) 
