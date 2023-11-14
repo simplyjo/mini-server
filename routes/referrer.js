@@ -25,11 +25,14 @@ router.post("/", cleanBody, async (req, res) => {
 
     let  user = await User.findOne({ twitterId:userId  });
     let  ref = await User.findOne({ userName: referrer });
+    console.log("user", user)
+    console.log("ref", ref)
     if(user) {
-    
+      console.log("afteruser", user)
+      console.log("beforeref", ref)
       if(ref){
-        console.log("user", user)
-        console.log("ref", ref)
+        console.log("afteruser", user)
+        console.log("afterref", ref)
     
        await User.updateOne(
         {userName:referrer},
