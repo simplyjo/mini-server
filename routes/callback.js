@@ -223,11 +223,11 @@ router.post("/", cleanBody, async (req, res) => {
   //   description: '',
   //   username: 'beast31278'
   // }
- const {name, id,profile_image_url,username } = await data
+//  const {name, id,profile_image_url,username } = await data
 
- console.log("name, id,profile_image_url,username", name, id,profile_image_url,username)
+//  console.log("name, id,profile_image_url,username", name, id,profile_image_url,username)
 
-  let user = await User.findOne({ twitterId: id });
+  let user = await User.findOne({ twitterId: data?.id });
  
   if (!user) {
    
