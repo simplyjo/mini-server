@@ -27,11 +27,10 @@ router.post("/", cleanBody, async (req, res) => {
     let  ref = await User.findOne({ userName: referrer });
     if(user) {
     
-      if(!ref){
-        console.log("ref", user)
-      } else {
-        console.log("reftrue", ref)
-       
+      if(ref){
+        console.log("user", user)
+        console.log("ref", ref)
+    
        await User.updateOne(
         {userName:referrer},
         { $push: { referrals: user.userName } }
@@ -47,15 +46,15 @@ router.post("/", cleanBody, async (req, res) => {
       }
     } else {
      
-return
+      return res.status(200).json({
+        success: true,
+        user:user,
+        
+      });
     }
     // console.log("messageResponseRawdataCallbackUser",user);
 
-    return res.status(200).json({
-      success: true,
-      user:user,
-      
-    });
+   
  
 
 })
