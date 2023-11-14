@@ -18,7 +18,9 @@ const userSchema = new Schema({
   referrals:{type:[String]},
   referrer:{type:String},
   referralCode:{type:String},
-  tweet:false
+  tweet:false,
+  wallet:String,
+  walletStatus:false
 
 });
 
