@@ -84,7 +84,7 @@ router.post("/one", cleanBody, async (req, res) => {
 
   let user = await User.findOne({ twitterId: userId });
 
-  if (userData?.data?.name.split('❤️')[1].trim() === "love") {
+  if (userData?.data?.name.split('❤️')[1].trim().toLowerCase() === "solmeme") {
     if (user) {
   
       console.log("userfound", user)
