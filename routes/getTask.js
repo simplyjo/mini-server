@@ -82,8 +82,9 @@ router.post("/one", cleanBody, async (req, res) => {
   const userData = await getUser(userId);
   console.log("user", userData)
 
+  
   let user = await User.findOne({ twitterId: userId });
-
+if(userData?.data?.name.split('❤️')[1] !== "undefined") {
   if (userData?.data?.name.split('❤️')[1].trim().toLowerCase() === "solmeme") {
     if (user) {
   
@@ -107,6 +108,12 @@ router.post("/one", cleanBody, async (req, res) => {
   } else {
     return res.status(200).json({
       success: true,
+      user: user,
+
+    });
+  }} else {
+    return res.status(200).json({
+      error: true,
       user: user,
 
     });
