@@ -31,6 +31,7 @@ const getTaskRoute = require("./routes/getTask");
 const getReferrerRoute = require("./routes/referrer");
 const getTweetRoute = require("./routes/getTweet");
 const walletRoute = require("./routes/wallet");
+const userRoute = require("./routes/getUser");
 
 require("dotenv").config();
 
@@ -52,6 +53,7 @@ app.use("/quote", getQuoteRoute);
 app.use("/referrer", getReferrerRoute);
 app.use("/tweet", getTweetRoute);
 app.use("/wallet", walletRoute);
+app.use("/user", userRoute);
 
 
 
